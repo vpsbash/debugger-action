@@ -33,7 +33,7 @@ while [ $DISPLAY -le 3 ]; do
   tmate -S /tmp/tmate.sock display -p '#{tmate_web}'
   [ ! -f /tmp/keepalive ] && echo -e "After connecting you can run 'touch /tmp/keepalive' to disable the 30000m timeout"
   DISPLAY=$(($DISPLAY+1))
-  sleep 1
+  sleep 30
 done
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
