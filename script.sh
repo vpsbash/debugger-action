@@ -33,7 +33,7 @@ while [ $DISPLAY -le 3 ]; do
   tmate -S /tmp/tmate.sock display -p '#{tmate_web}'
   [ ! -f /tmp/keepalive ] && echo -e "After connecting you can run 'touch /tmp/keepalive' to disable the 30000m timeout"
   DISPLAY=$(($DISPLAY+1))
-  ls
+  sleep 1
 done
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
@@ -44,13 +44,13 @@ fi
 # Wait for connection to close or timeout in 15 min
 timeout=$((30000*60))
 while [ -S /tmp/tmate.sock ]; do
-  ls
+  sleep 1
   timeout=$(($timeout-1))
 
   if [ ! -f /tmp/keepalive ]; then
     if (( timeout < 0 )); then
       echo Waiting on tmate connection timed out!
-      sudo init 0
+      sudo pwd
     fi
   fi
 done
